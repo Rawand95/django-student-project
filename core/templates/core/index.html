@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>یەکەم پەڕەی دجانگۆ</title>
+
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+
+    <a href="{% url 'logout' %}" style="color: darkred; float: left; font-weight: bold;">چوونەدەرەوە</a>
+
+    <h1> زیاد کردنی قوتابی نوێ</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">سەیڤکردن</button>
+    </form>
+
+    <hr>
+
+    <h1>لیستی قوتابیانی تۆمارکراو</h1>
+    <ul>
+        {% for s in students %}
+            <li>ناوی قوتابی :{{ s.name }} | ئیمەیڵ: {{ s.email }} | تەمەن: {{ s.age }}
+            <a href="{% url 'delete_student' s.id %}" style="color:red; margin-right: 10px;">سڕینەوە</a>
+            <a href="{% url 'update_student' s.id %}" style="color: blue; margin-right: 10px;">گۆرین</a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+
+
+
+
+</body>
+</html>
